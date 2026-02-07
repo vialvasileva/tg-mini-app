@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import type { User } from './types/user';
 import { login } from './api/auth';
 import './App.css';
+import { retrieveLaunchParams } from '@tma.js/sdk';
 
 function App() {
     const [user, setUser] = useState<User | null>(null);
@@ -9,13 +10,11 @@ function App() {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        const initAuth = async () => {
+        const fetchData = async () => {
             try {
-                window.Telegram?.WebApp?.ready();
+                const { initDataRaw } = retrieveLaunchParams();
 
-                const initDataRaw = window.Telegram?.WebApp?.initData;
-
-                if (!initDataRaw) {
+                if (!initDataRaw || typeof initDataRaw !== 'string') {
                     throw new Error('initData не найдена. Откройте через Telegram бота.');
                 }
 
@@ -23,8 +22,6 @@ function App() {
                 const response = await login(initDataRaw, timezone);
 
                 setUser(response.user);
-                window.Telegram?.WebApp?.expand();
-
             } catch (err) {
                 setError(err instanceof Error ? err.message : 'Неизвестная ошибка');
             } finally {
@@ -32,7 +29,7 @@ function App() {
             }
         };
 
-        initAuth();
+        fetchData();
     }, []);
 
     if (loading) {
@@ -124,15 +121,3 @@ function App() {
 }
 
 export default App;
-
-declare global {
-    interface Window {
-        Telegram?: {
-            WebApp?: {
-                ready: () => void;
-                expand: () => void;
-                initData: string;
-            };
-        };
-    }
-}
