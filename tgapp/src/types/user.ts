@@ -8,7 +8,3 @@ export interface User {
     allows_write_to_pm?: boolean;
     photo_url?: string;
 }
-
-export interface LoginResponse {
-    user: User;
-}

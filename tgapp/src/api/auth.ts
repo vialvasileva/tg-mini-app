@@ -1,6 +1,10 @@
-import type { LoginResponse } from '../types/user';
+import type {User} from "../types/user.ts";
 
-const API_BASE_URL = 'https://tma-api.dobryapi.online/tg-api/v1';
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
+export interface LoginResponse {
+    user: User;
+}
 
 export const login = async (
     initData: string,
@@ -20,19 +24,8 @@ export const login = async (
     });
 
     if (!response.ok) {
-        const errorText = await response.text();
-
-        let errorData;
-        try {
-            errorData = JSON.parse(errorText);
-        } catch {
-            errorData = { detail: errorText };
-        }
-
-        throw new Error(errorData?.detail || `HTTP error ${response.status}`);
+        throw new Error('Login request failed');
     }
 
-    const data = await response.json();
-
-    return data;
+    return response.json();
 };
