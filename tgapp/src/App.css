@@ -1,0 +1,191 @@
+:root {
+    --tg-bg-color: #ffffff;
+    --tg-text-color: #000000;
+    --tg-hint-color: #999999;
+    --tg-link-color: #2481cc;
+    --tg-button-color: #2481cc;
+    --tg-button-text-color: #ffffff;
+    --tg-secondary-bg-color: #f0f0f0;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --tg-bg-color: #212121;
+        --tg-text-color: #ffffff;
+        --tg-hint-color: #aaaaaa;
+        --tg-link-color: #8774e1;
+        --tg-button-color: #8774e1;
+        --tg-button-text-color: #ffffff;
+        --tg-secondary-bg-color: #181818;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--tg-theme-bg-color, var(--tg-bg-color));
+    color: var(--tg-theme-text-color, var(--tg-text-color));
+}
+
+.app {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.loading {
+    text-align: center;
+}
+
+.spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid var(--tg-theme-hint-color, var(--tg-hint-color));
+    border-top-color: var(--tg-theme-button-color, var(--tg-button-color));
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 16px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading p {
+    color: var(--tg-theme-hint-color, var(--tg-hint-color));
+}
+
+.error-card {
+    background: var(--tg-theme-secondary-bg-color, var(--tg-secondary-bg-color));
+    border-radius: 16px;
+    padding: 32px;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.error-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.error-card h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.error-card p {
+    margin-bottom: 8px;
+}
+
+.error-card small {
+    font-size: 13px;
+    color: var(--tg-theme-hint-color, var(--tg-hint-color));
+    display: block;
+    margin-top: 12px;
+}
+
+.card {
+    background: var(--tg-theme-secondary-bg-color, var(--tg-secondary-bg-color));
+    border-radius: 16px;
+    padding: 24px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.header h1 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.premium-badge {
+    background: var(--tg-theme-button-color, var(--tg-button-color));
+    color: var(--tg-theme-button-text-color, var(--tg-button-text-color));
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.avatar-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--tg-theme-button-color, var(--tg-button-color));
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: var(--tg-theme-bg-color, var(--tg-bg-color));
+    border-radius: 8px;
+}
+
+.label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--tg-theme-hint-color, var(--tg-hint-color));
+}
+
+.value {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--tg-theme-link-color, var(--tg-link-color));
+}
+
+.json-details {
+    background: var(--tg-theme-bg-color, var(--tg-bg-color));
+    border-radius: 8px;
+    padding: 16px;
+    cursor: pointer;
+}
+
+.json-details summary {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--tg-theme-link-color, var(--tg-link-color));
+    list-style: none;
+}
+
+.json-details pre {
+    margin-top: 12px;
+    padding: 12px;
+    background: var(--tg-theme-secondary-bg-color, var(--tg-secondary-bg-color));
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 12px;
+    font-family: monospace;
+}
